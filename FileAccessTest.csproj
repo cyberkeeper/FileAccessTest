@@ -6,12 +6,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>cat.png</PackageIcon>
     <ApplicationIcon>resources\cat.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="cat.png" />
+    <None Remove="resources\cat.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,14 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="cat.png" />
+    <Resource Include="resources\cat.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="resources\cat.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
     <None Update="resources\slimer.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

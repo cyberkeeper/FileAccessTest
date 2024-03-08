@@ -5,19 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileAccessTest"
         mc:Ignorable="d"
-        Title="File access test" Height="615" Width="400" Closing="Window_Closing"
-        WindowStartupLocation="CenterScreen" Icon="/cat.png">
-
-    <Grid>
-        <Button x:Name="btnLoad" Content="Load file" HorizontalAlignment="Left" Margin="20,24,0,0" VerticalAlignment="Top" Width="100" Click="btnLoad_Click"/>
-        <Button x:Name="btnSave" Content="Save file" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" Width="100" Click="btnSave_Click"/>
-        <CheckBox x:Name="cbAppend" Content="Append to file?" HorizontalAlignment="Left" Margin="264,24,0,0" VerticalAlignment="Top" ToolTip="Tick to append contents of file"/>
-        <TextBox x:Name="txtFileContent" HorizontalAlignment="Center" Height="220" Margin="0,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320" Background="#FFDDF5BB"/>
-        <Label Content="File contents" HorizontalAlignment="Left" Margin="40,128,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnClose" Content="Exit" HorizontalAlignment="Left" Margin="280,524,0,0" VerticalAlignment="Top" Width="100" Click="btnClose_Click"/>
-        <Rectangle HorizontalAlignment="Center" Height="266" Margin="0,128,0,0" Stroke="Black" VerticalAlignment="Top" Width="360"/>
-        <TextBlock x:Name="txtInfo" HorizontalAlignment="Center" Height="59" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" IsEnabled="False" Background="#FFE0F5F2"/>
-        <TextBlock x:Name="txtLocation" HorizontalAlignment="Left" Height="85" Margin="20,409,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="345" IsEnabled="False" Background="#FFE0F5F2"/>
-
+        Title="File access test (b)" Height="615" Width="400" Closing="Window_Closing"
+        WindowStartupLocation="CenterScreen" Icon="./resources/cat.png" >
+    <Window.Resources>
+        <local:OverwriteViewModel x:Key="vm" />
+    </Window.Resources>
+    <Grid >
+        <Menu DockPanel.Dock="Top" >
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Click="Open_Click" />
+                <MenuItem Header="_Save" Click="Save_Click" />
+                <Separator/>
+                <MenuItem Header="_Exit" Click="Close_Click" />
+            </MenuItem>
+            <MenuItem Header="_Setting">
+                <MenuItem Header="_Refresh" Click="Refresh_Click" />
+                <MenuItem Header="_Overwrite" IsCheckable="True" IsChecked="{Binding IsChecked, Source={StaticResource vm}}" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_Info" Click="Info_Click" />
+                <MenuItem Header="_About" Click="About_Click" />
+            </MenuItem>
+        </Menu>
+        <Button x:Name="btnLoad" Content="_Open file" HorizontalAlignment="Left" Margin="20,24,0,0" VerticalAlignment="Top" Width="100" Click="Open_Click" ToolTip="Open text from file" AutomationProperties.AcceleratorKey="L" AutomationProperties.AccessKey="L"/>
+        <Button x:Name="btnSave" Content="_Save file" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Top" Width="100" Click="Save_Click" ToolTip="Save text to file" AutomationProperties.AcceleratorKey="S" AutomationProperties.AccessKey="S"/>
+        <CheckBox x:Name="cbAppend" Content="Overwrite file?" HorizontalAlignment="Left" Margin="264,24,0,0" VerticalAlignment="Top" ToolTip="Tick to overwrite existing contents of file" IsChecked="{Binding IsChecked, Source={StaticResource vm}}"/>
+        <TextBox x:Name="txtFileContent" HorizontalAlignment="Center" Height="220" Margin="0,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" Background="White" ToolTip="Text loaded from file" Text="Once a file is loaded the contents will be displayed here." BorderBrush="Black"/>
+        <Label x:Name="lblContentsDescription" Content="Contents of file" HorizontalAlignment="Left" Margin="20,128,0,0" VerticalAlignment="Top" Background="Transparent"/>
+        <Button x:Name="btnClose" Content="_Exit" HorizontalAlignment="Left" Margin="280,524,0,0" VerticalAlignment="Top" Width="100" Click="Close_Click" AutomationProperties.AcceleratorKey="E" AutomationProperties.AccessKey="E"/>
+        <TextBlock x:Name="txtInfo" HorizontalAlignment="Center" Height="59" Margin="0,64,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="360" IsEnabled="False" Background="#FFDDDDDD" Text="Status of file access test."/>
+        <TextBlock x:Name="txtLocation" HorizontalAlignment="Left" Height="55" Margin="20,439,0,0" TextWrapping="Wrap" Text="Information about the default location of the program." VerticalAlignment="Top" Width="345" IsEnabled="False" Background="#FFDDDDDD" Visibility="Hidden"/>
+        <CheckBox x:Name="cbMoreInfo" Content="Show more information" HorizontalAlignment="Left" Margin="20,409,0,0" VerticalAlignment="Top" Checked="cbMoreInfo_Checked" Unchecked="cbMoreInfo_Unchecked"/>
     </Grid>
+
 </Window>

@@ -76,7 +76,7 @@ namespace Useful
             catch (IOException ioe)
             {
                 throw new Exception("Exception thrown: " + ioe.Message);
-            }
+            }            
         }
     }
 }
